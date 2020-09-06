@@ -120,6 +120,7 @@ export EDITOR='nvim'
 alias duf='du -sh'
 alias cpnvim='cp ~/.config/nvim/coc-settings.json ~/Documents/Repos/dots/nvim/coc-settings.json ; cp ~/.config/nvim/init.vim ~/Documents/Repos/dots/nvim/init.vim'
 alias cpzal='cp ~/.zshrc ~/Documents/Repos/dots/zshrc ; cp ~/.config/alacritty/alacritty.yml ~/Documents/Repos/dots/alacritty/alacritty.yml'
+alias init='vi ~/.config/nvim/init.vim'
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # vi mode
@@ -139,3 +140,5 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export PATH="$PATH":"$HOME/Developer/flutter/.pub-cache/bin"

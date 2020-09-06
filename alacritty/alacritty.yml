@@ -124,7 +124,7 @@ key_bindings:
   #- { key: N,                           mode: Vi, action: SearchNext              }
   #- { key: N,      mods: Shift,         mode: Vi, action: SearchPrevious          }
 window:
-    dimensions:
+  dimensions:
     columns: 0
     lines: 0
 
@@ -133,8 +133,8 @@ window:
     y: 0
 
   padding:
-    x: 3
-    y: 3
+    x: 0
+    y: 0
 
   dynamic_padding: true
 
@@ -292,7 +292,7 @@ bell:
   # Visual bell animation color.
   color: '#ffffff'
 
-background_opacity: 0.7
+background_opacity: 0.9
 
 # Allow terminal applications to change Alacritty's window title.
 #dynamic_title: true
@@ -303,5 +303,3 @@ cursor:
   vi_mode_style: none
 
 live_config_reload: true
-
-

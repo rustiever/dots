@@ -17,6 +17,7 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim'
 Plug 'rakr/vim-one'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'morhetz/gruvbox'
 
 " ====== Files ======
@@ -63,8 +64,8 @@ if has('termguicolors')
     set termguicolors
 endif
 set background=dark    " Setting dark mode
-let g:gruvbox_italic=1
-colorscheme gruvbox
+" let g:gruvbox_italic=1
+colorscheme onehalfdark
 
 " Mapping
 " Coc-config file
@@ -255,7 +256,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 
 " Switch to your current theme
-let g:airline_theme = 'gruvbox'
+let g:airline_theme = 'onehalfdark'
 
 " Always show tabs 
 set showtabline=2
