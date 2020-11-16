@@ -16,7 +16,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'frazrepo/vim-rainbow'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim'
-Plug 'rakr/vim-one'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'morhetz/gruvbox'
 
@@ -41,7 +40,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-sandwich'
 Plug 'honza/vim-snippets'
 Plug 'thaerkh/vim-workspace'
-Plug 'liuchengxu/vim-clap'
 Plug 'pechorin/any-jump.vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'mattn/emmet-vim'
@@ -59,7 +57,6 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 let g:python_host_prog = '/usr/bin/python'
 
 "Theme
-" <,
 if has('termguicolors')
     set termguicolors
 endif
@@ -157,7 +154,6 @@ nnoremap <leader>rr :Reloadrc<cr>
 inoremap <M-l> <right>
 inoremap <M-h> <left>
 
-
 " Genral sets
 set nocompatible
 filetype plugin indent on      " Automatically detect file types
@@ -248,10 +244,6 @@ let g:airline#extensions#tabline#right_alt_sep = ''
 
 " enable powerline fonts
 let g:airline_powerline_fonts = 1
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 
