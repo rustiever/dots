@@ -1,11 +1,11 @@
 {
+  "languageserver": {},
   "python.jediEnabled": false,
   "diagnostic.errorSign": "✖",
   "diagnostic.warningSign": "☢",
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": "ﯦ",
   "diagnostic.enable": true,
-  "diagnostic.signOffset": 9999999,
   "diagnostic.highlightOffset": 9999999,
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.separateRelatedInformationAsDiagnostics": true,
