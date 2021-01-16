@@ -142,4 +142,7 @@ export PATH="/usr/local/opt/openjdk/bin:$PATH"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH="$PATH":"$HOME/Developer/flutter/.pub-cache/bin"
+export GOPATH=/Users/sharan/go
+export PATH=$PATH:$GOPATH
+export PATH=$PATH:$GOPATH/bin
 unsetopt HIST_VERIFY

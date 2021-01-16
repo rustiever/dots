@@ -10,6 +10,7 @@ endif
 call plug#begin()
 Plug 'wakatime/vim-wakatime' "wakatime integration
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'Yggdroot/indentLine'
 Plug 'adelarsq/neoline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'frazrepo/vim-rainbow'
@@ -27,7 +28,7 @@ Plug 'unblevable/quick-scope'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'simnalamburt/vim-mundo'
-" Plug 'romgrk/barbar.nvim'
+Plug 'romgrk/barbar.nvim'
 Plug 'machakann/vim-sandwich'
 
 " Languages 
@@ -143,6 +144,46 @@ nnoremap <M-e> :CocCommand explorer<CR>
 " Vim-Go
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go set list lcs=tab:\|\ 
+
+" BarBar
+" Magic buffer-picking mode
+nnoremap <silent> <C-s> :BufferPick<CR>
+" Sort automatically by...
+nnoremap <silent> <Space>bd :BufferOrderByDirectory<CR>
+nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
+" Move to previous/next
+nnoremap <silent>    <A-.> :BufferNext<CR>
+nnoremap <silent>    <A-,> :BufferPrevious<CR>
+" Re-order to previous/next
+nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
+nnoremap <silent>    <A->> :BufferMoveNext<CR>
+" Goto buffer in position...
+nnoremap <silent>    <A-1> :BufferGoto 1<CR>
+nnoremap <silent>    <A-2> :BufferGoto 2<CR>
+nnoremap <silent>    <A-3> :BufferGoto 3<CR>
+nnoremap <silent>    <A-4> :BufferGoto 4<CR>
+nnoremap <silent>    <A-5> :BufferGoto 5<CR>
+nnoremap <silent>    <A-6> :BufferGoto 6<CR>
+nnoremap <silent>    <A-7> :BufferGoto 7<CR>
+nnoremap <silent>    <A-8> :BufferGoto 8<CR>
+nnoremap <silent>    <A-9> :BufferLast<CR>
+" Close buffer
+nnoremap <silent>    <A-c> :BufferClose<CR>
+
+let bufferline.icon_separator_active = '▎'
+let bufferline.icon_separator_inactive = '▎'
+let bufferline.icon_close_tab = ''
+let bufferline.icon_close_tab_modified = '●'
+" Sets the maximum padding width with which to surround each tab
+let bufferline.maximum_padding = 4
+
+
+" IndentLine
+let g:indentLine_enabled = 1
+let g:indentLine_setColors = 0
+let g:indentLine_color_term = 239
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " wakatime
 let g:wakatime_PythonBinary = '/usr/local/bin/python3'
@@ -286,8 +327,8 @@ endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
+" nmap <silent> <C-s> <Plug>(coc-range-select)
+" xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
