@@ -84,10 +84,10 @@ flutter
 source $ZSH/oh-my-zsh.sh
 
 # setting neovim/nvim as vim/vi
-if type nvim > /dev/null 2>&1; then
+# if type nvim > /dev/null 2>&1; then
     alias v='nvim'
     alias vi='nvim'
-fi
+# fi
 
 export EDITOR='nvim'
 
@@ -118,9 +118,11 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias duf='du -sh'
-alias cpnvim='cp ~/.config/nvim/coc-settings.json ~/Documents/Repos/dots/nvim/coc-settings.json ; cp ~/.config/nvim/init.vim ~/Documents/Repos/dots/nvim/init.vim'
+alias cpnvim='cp -r ~/.config/nvim/ ~/Documents/Repos/dots/'
 alias cpzal='cp ~/.zshrc ~/Documents/Repos/dots/zshrc ; cp ~/.config/alacritty/alacritty.yml ~/Documents/Repos/dots/alacritty/alacritty.yml'
 alias init='vi ~/.config/nvim/init.vim'
+alias neovim='~/.config/nvim'
+alias dots='~/.config/nvim/'
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # vi mode

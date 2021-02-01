@@ -1,6 +1,7 @@
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'wakatime/vim-wakatime'
+  use 'bluz71/vim-moonfly-colors'
   use 'glepnir/zephyr-nvim'
   use 'romgrk/barbar.nvim'
   use 'unblevable/quick-scope'
@@ -12,6 +13,10 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/completion-nvim'
   use {
+    'fatih/vim-go',
+    run = ':GoUpdateBinaries'
+  }
+  use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
@@ -21,6 +26,10 @@ return require('packer').startup(function()
   use {
     'nvim-treesitter/nvim-treesitter-refactor',
   }
+  use {
+  'nvim-telescope/telescope.nvim',
+  requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+}
   use {
     'hrsh7th/vim-vsnip',
     requires = {'hrsh7th/vim-vsnip-integ', opt = true}

@@ -9,11 +9,148 @@ endif
 try
 
 lua << END
-local plugins = {}
+  local package_path_str = "/Users/sharan/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/sharan/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/sharan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/sharan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+  local install_cpath_pattern = "/Users/sharan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+  if not string.find(package.path, package_path_str, 1, true) then
+    package.path = package.path .. ';' .. package_path_str
+  end
+
+  if not string.find(package.cpath, install_cpath_pattern, 1, true) then
+    package.cpath = package.cpath .. ';' .. install_cpath_pattern
+  end
+
+_G.packer_plugins = {
+  ["auto-pairs"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/auto-pairs"
+  },
+  ["barbar.nvim"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/barbar.nvim"
+  },
+  ["completion-nvim"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/completion-nvim"
+  },
+  ["galaxyline.nvim"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
+  },
+  nerdcommenter = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nerdcommenter"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+  },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+  },
+  ["nvim-treesitter-refactor"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nvim-treesitter-refactor"
+  },
+  ["nvim-treesitter-textobjects"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
+  },
+  ["packer.nvim"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  },
+  ["plenary.nvim"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+  },
+  ["popup.nvim"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/popup.nvim"
+  },
+  ["quick-scope"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/quick-scope"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["vim-go"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/vim-go"
+  },
+  ["vim-sandwich"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/vim-sandwich"
+  },
+  ["vim-vsnip"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/vim-vsnip"
+  },
+  ["vim-vsnip-integ"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ"
+  },
+  ["vim-wakatime"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/vim-wakatime"
+  },
+  ["zephyr-nvim"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/zephyr-nvim"
+  }
+}
 
 local function handle_bufread(names)
   for _, name in ipairs(names) do
-    local path = plugins[name].path
+    local path = packer_plugins[name].path
     for _, dir in ipairs({ 'ftdetect', 'ftplugin', 'after/ftdetect', 'after/ftplugin' }) do
       if #vim.fn.finddir(dir, path) > 0 then
         vim.cmd('doautocmd BufRead')
@@ -25,7 +162,7 @@ end
 
 local packer_load = nil
 local function handle_after(name, before)
-  local plugin = plugins[name]
+  local plugin = packer_plugins[name]
   plugin.load_after[before] = nil
   if next(plugin.load_after) == nil then
     packer_load({name}, {})
@@ -35,7 +172,7 @@ end
 packer_load = function(names, cause)
   local some_unloaded = false
   for _, name in ipairs(names) do
-    if not plugins[name].loaded then
+    if not packer_plugins[name].loaded then
       some_unloaded = true
       break
     end
@@ -47,14 +184,14 @@ packer_load = function(names, cause)
   local del_cmds = {}
   local del_maps = {}
   for _, name in ipairs(names) do
-    if plugins[name].commands then
-      for _, cmd in ipairs(plugins[name].commands) do
+    if packer_plugins[name].commands then
+      for _, cmd in ipairs(packer_plugins[name].commands) do
         del_cmds[cmd] = true
       end
     end
 
-    if plugins[name].keys then
-      for _, key in ipairs(plugins[name].keys) do
+    if packer_plugins[name].keys then
+      for _, key in ipairs(packer_plugins[name].keys) do
         del_maps[key] = true
       end
     end
@@ -69,22 +206,22 @@ packer_load = function(names, cause)
   end
 
   for _, name in ipairs(names) do
-    if not plugins[name].loaded then
+    if not packer_plugins[name].loaded then
       vim.cmd('packadd ' .. name)
-      if plugins[name].config then
-        for _i, config_line in ipairs(plugins[name].config) do
+      if packer_plugins[name].config then
+        for _i, config_line in ipairs(packer_plugins[name].config) do
           loadstring(config_line)()
         end
       end
 
-      if plugins[name].after then
-        for _, after_name in ipairs(plugins[name].after) do
+      if packer_plugins[name].after then
+        for _, after_name in ipairs(packer_plugins[name].after) do
           handle_after(after_name, name)
           vim.cmd('redraw')
         end
       end
 
-      plugins[name].loaded = true
+      packer_plugins[name].loaded = true
     end
   end
 
