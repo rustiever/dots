@@ -1,9 +1,8 @@
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'wakatime/vim-wakatime'
-  use 'bluz71/vim-moonfly-colors'
-  use 'glepnir/zephyr-nvim'
   use 'romgrk/barbar.nvim'
+  use 'bluz71/vim-moonfly-colors'
   use 'unblevable/quick-scope'
   use 'machakann/vim-sandwich'
   use 'preservim/nerdcommenter'
@@ -11,7 +10,17 @@ return require('packer').startup(function()
   -- use 'golang/vscode-go'
   -- use 'simnalamburt/vim-mundo',
   use 'neovim/nvim-lspconfig'
-  use 'nvim-lua/completion-nvim'
+  use 'glepnir/lspsaga.nvim'
+  use 'hrsh7th/nvim-compe'
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
   use {
     'fatih/vim-go',
     run = ':GoUpdateBinaries'
@@ -26,10 +35,14 @@ return require('packer').startup(function()
   use {
     'nvim-treesitter/nvim-treesitter-refactor',
   }
+  -- use {
+  -- 'RishabhRD/nvim-lsputils',
+  -- requires = {'RishabhRD/popfix', opt = true}
+  -- }
   use {
-  'nvim-telescope/telescope.nvim',
-  requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-}
+    'nvim-telescope/telescope.nvim',
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+  }
   use {
     'hrsh7th/vim-vsnip',
     requires = {'hrsh7th/vim-vsnip-integ', opt = true}

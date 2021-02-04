@@ -2,14 +2,13 @@ lua require('plugins')
 autocmd BufWritePost plugins.lua PackerCompile
 
 set termguicolors              " enable true colors support
-" colorscheme zephyr
 colorscheme moonfly
 let g:moonflyCursorColor = 1
 let g:moonflyUnderlineMatchParen = 1
 lua require ('galaxy')
 lua require ('tree-sitter')
 lua require ('lsp-config')
-
+lua require('gitsigns').setup()
 
 "QuickScope
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -17,15 +16,20 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_lazy_highlight = 1
 let g:qs_buftype_blacklist = ['terminal', 'nofile']
 
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" lua <<EOF
+" vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
+" vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
+" vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
+" vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+" vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+" vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+" vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+" vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
+" EOF
 
-" Vim-go 
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
+
+
 
 
 set nocompatible
@@ -95,7 +99,7 @@ set undolevels=1000      " Maximum number of changes that can be undone
 set undoreload=10000     " Maximum number lines to save for undo on a buffer reload
 set showtabline=2        " Always showtabline
 set noshowmode           " We don't need to see things like -- INSERT -- anymore
-
+set completeopt=menu,menuone,noselect
 " Key - Mappings
 let mapleader ="\<Space>" " leader key
 " Visual shifting (does not exit Visual mode)
@@ -147,7 +151,6 @@ nnoremap <silent> <Leader>tp :setlocal paste!<CR>
 " nnoremap <silent> gb :bprevious<CR>
 " nnoremap <silent> gn :bnext<CR>
 nnoremap <silent> <Leader>d :bd<CR>
-nnoremap <F10> :ls<CR>
 " }
 
 " File {
@@ -174,6 +177,16 @@ noremap 0 ^
 " Just in case you need to go to the very beginning of a line
 noremap ^ 0
 
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
+
+" Vim-go 
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
 "NerdCommenter
 "Toggle comments in source code
 let g:NERDToggleCheckAllLines = 1
@@ -216,30 +229,39 @@ nnoremap <silent>    <A-c> :BufferClose<CR>
 "                          :BufferCloseBuffersRight<CR>
 "
 "
-" Completion-nvim
-" Use <Tab> and <S-Tab> to navigate through popup menu
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-imap <silent> <c-p> <Plug>(completion_trigger)
-imap <tab> <Plug>(completion_smart_tab)
-imap <s-tab> <Plug>(completion_smart_s_tab)
-let g:completion_enable_snippet = 'vim-vsnip'
-let g:completion_confirm_key = ""
-let g:completion_enable_auto_paren = 1
-imap <expr> <cr>  pumvisible() ? complete_info()["selected"] != "-1" ?
-                 \ "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" :  "\<CR>"
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
-let g:completion_matching_ignore_case = 1
-let g:completion_matching_smart_case = 1
-
 " Vsnip
 " Jump forward or backward
-imap <expr> <C-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-j>'
-smap <expr> <C-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-j>'
-imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-k>'
-smap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-k>'
+imap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-k>'
+smap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-k>'
+imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-j>'
+smap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-j>'
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" -- lsp provider to find the cursor word definition and reference
+nnoremap <silent> gh :Lspsaga lsp_finder<CR>
+" -- code action
+nnoremap <silent><leader>ca :Lspsaga code_action<CR>
+vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
+" -- show hover doc
+nnoremap <silent>K :Lspsaga hover_doc<CR>
+" -- scroll down hover doc
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<CR>
+" -- scroll up hover doc
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<CR>
+" -- show signature help
+nnoremap <silent> gs :Lspsaga signature_help<CR>
+" -- rename
+nnoremap <silent>gr :Lspsaga rename<CR>
+" -- close rename win use <C-c> in insert mode or `q` in noremal mode or `:q`
+" -- preview definition
+nnoremap <silent> gd :Lspsaga preview_definition<CR>
+" -- show
+nnoremap <silent> <leader>cd :Lspsaga show_line_diagnostics<CR>
+" -- jump diagnostic
+nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
+" -- float terminal also you can pass the cli command in open_float_terminal function
+nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
+tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>

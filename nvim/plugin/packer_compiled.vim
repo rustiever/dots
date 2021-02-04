@@ -44,6 +44,19 @@ _G.packer_plugins = {
     only_setup = false,
     path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
   },
+  ["gitsigns.nvim"] = {
+    config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0" },
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+  },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+  },
   nerdcommenter = {
     loaded = true,
     only_sequence = true,
@@ -116,6 +129,12 @@ _G.packer_plugins = {
     only_setup = false,
     path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/vim-go"
   },
+  ["vim-moonfly-colors"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors"
+  },
   ["vim-sandwich"] = {
     loaded = true,
     only_sequence = true,
@@ -139,12 +158,6 @@ _G.packer_plugins = {
     only_sequence = true,
     only_setup = false,
     path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/vim-wakatime"
-  },
-  ["zephyr-nvim"] = {
-    loaded = true,
-    only_sequence = true,
-    only_setup = false,
-    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/zephyr-nvim"
   }
 }
 
@@ -277,6 +290,8 @@ end
 
 -- Pre-load configuration
 -- Post-load configuration
+-- Config for: gitsigns.nvim
+loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0")()
 -- Conditional loads
 -- Load plugins in order defined by `after`
 END

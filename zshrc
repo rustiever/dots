@@ -118,10 +118,9 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias duf='du -sh'
-alias cpnvim='cp -r ~/.config/nvim/ ~/Documents/Repos/dots/'
-alias cpzal='cp ~/.zshrc ~/Documents/Repos/dots/zshrc ; cp ~/.config/alacritty/alacritty.yml ~/Documents/Repos/dots/alacritty/alacritty.yml'
+alias cpnvim='cp -r ~/.config/nvim/ ~/Documents/Repos/dots/nvim/'
+alias cpzal='\cp ~/.zshrc ~/Documents/Repos/dots/zshrc ; \cp ~/.config/alacritty/alacritty.yml ~/Documents/Repos/dots/alacritty/alacritty.yml; \cp ~/.p10k.zsh ~/Documents/Repos/dots/'
 alias init='vi ~/.config/nvim/init.vim'
-alias neovim='~/.config/nvim'
 alias dots='~/.config/nvim/'
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
