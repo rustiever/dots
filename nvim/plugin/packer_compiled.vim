@@ -32,12 +32,6 @@ _G.packer_plugins = {
     only_setup = false,
     path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/barbar.nvim"
   },
-  ["completion-nvim"] = {
-    loaded = true,
-    only_sequence = true,
-    only_setup = false,
-    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/completion-nvim"
-  },
   ["galaxyline.nvim"] = {
     loaded = true,
     only_sequence = true,
@@ -63,29 +57,17 @@ _G.packer_plugins = {
     only_setup = false,
     path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nerdcommenter"
   },
+  ["nvim-compe"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nvim-compe"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     only_sequence = true,
     only_setup = false,
     path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
-  },
-  ["nvim-treesitter"] = {
-    loaded = true,
-    only_sequence = true,
-    only_setup = false,
-    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
-  },
-  ["nvim-treesitter-refactor"] = {
-    loaded = true,
-    only_sequence = true,
-    only_setup = false,
-    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nvim-treesitter-refactor"
-  },
-  ["nvim-treesitter-textobjects"] = {
-    loaded = true,
-    only_sequence = true,
-    only_setup = false,
-    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -158,6 +140,12 @@ _G.packer_plugins = {
     only_sequence = true,
     only_setup = false,
     path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/vim-wakatime"
+  },
+  ["vscode-go"] = {
+    loaded = true,
+    only_sequence = true,
+    only_setup = false,
+    path = "/Users/sharan/.local/share/nvim/site/pack/packer/start/vscode-go"
   }
 }
 

@@ -7,7 +7,7 @@ return require('packer').startup(function()
   use 'machakann/vim-sandwich'
   use 'preservim/nerdcommenter'
   use 'jiangmiao/auto-pairs'
-  -- use 'golang/vscode-go'
+  use 'golang/vscode-go'
   -- use 'simnalamburt/vim-mundo',
   use 'neovim/nvim-lspconfig'
   use 'glepnir/lspsaga.nvim'
@@ -29,15 +29,11 @@ return require('packer').startup(function()
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
-  use {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-  }
-  use {
-    'nvim-treesitter/nvim-treesitter-refactor',
-  }
   -- use {
-  -- 'RishabhRD/nvim-lsputils',
-  -- requires = {'RishabhRD/popfix', opt = true}
+    -- 'nvim-treesitter/nvim-treesitter-textobjects',
+  -- }
+  -- use {
+    -- 'nvim-treesitter/nvim-treesitter-refactor',
   -- }
   use {
     'nvim-telescope/telescope.nvim',

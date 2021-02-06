@@ -16,20 +16,6 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_lazy_highlight = 1
 let g:qs_buftype_blacklist = ['terminal', 'nofile']
 
-" lua <<EOF
-" vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
-" vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
-" vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
-" vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
-" vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
-" vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-" vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
-" vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
-" EOF
-
-
-
-
 
 
 set nocompatible
@@ -240,28 +226,36 @@ imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l
 smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 
 " -- lsp provider to find the cursor word definition and reference
-nnoremap <silent> gh :Lspsaga lsp_finder<CR>
+nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 " -- code action
-nnoremap <silent><leader>ca :Lspsaga code_action<CR>
-vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
+nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
 " -- show hover doc
-nnoremap <silent>K :Lspsaga hover_doc<CR>
+nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
 " -- scroll down hover doc
 nnoremap <silent> <C-f> <cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<CR>
 " -- scroll up hover doc
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<CR>
 " -- show signature help
-nnoremap <silent> gs :Lspsaga signature_help<CR>
+nnoremap <silent> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
 " -- rename
-nnoremap <silent>gr :Lspsaga rename<CR>
+nnoremap <silent>gr <cmd>lua require('lspsaga.rename').rename()<CR>
 " -- close rename win use <C-c> in insert mode or `q` in noremal mode or `:q`
 " -- preview definition
-nnoremap <silent> gd :Lspsaga preview_definition<CR>
+nnoremap <silent> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
 " -- show
-nnoremap <silent> <leader>cd :Lspsaga show_line_diagnostics<CR>
+nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
 " -- jump diagnostic
-nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
+nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
 " -- float terminal also you can pass the cli command in open_float_terminal function
-nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
-tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
+nnoremap <silent> <A-d> <cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR> 
+"-- or open_float_terminal('lazygit')<CR>
+tnoremap <silent> <A-d> <C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>
+
+" nvim_compe
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
