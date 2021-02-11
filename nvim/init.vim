@@ -2,13 +2,8 @@ lua require('plugins')
 autocmd BufWritePost plugins.lua PackerCompile
 
 set termguicolors              " enable true colors support
-colorscheme moonfly
-let g:moonflyCursorColor = 1
-let g:moonflyUnderlineMatchParen = 1
-lua require ('galaxy')
 lua require ('tree-sitter')
 lua require ('lsp-config')
-lua require('gitsigns').setup()
 
 "QuickScope
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -114,10 +109,10 @@ inoremap jj <Esc>
 cnoremap jj <C-c>
 " Quit visual mode
 vnoremap v <Esc>
-" Move to the start of line
-nnoremap H ^
-" Move to the end of line
-nnoremap L $
+" " Move to the start of line
+" nnoremap H ^
+" " Move to the end of line
+" nnoremap L $
 " Quick command mode
 nnoremap <CR> :
 " Yank to the end of line
@@ -145,9 +140,6 @@ nnoremap <silent> <Leader>w :update<CR>
 nnoremap <silent> <Leader>q  :q<CR>
 nnoremap <silent> <Leader>Q  :qa!<CR>
 " }
-" esc key to go normal mode in terminal
-tnoremap <Esc> <C-\><C-n>i
-"********************************
 
 " init.vim/vimrc
 nnoremap <F9> :e ~/.config/nvim/init.vim<CR>
@@ -163,26 +155,27 @@ noremap 0 ^
 " Just in case you need to go to the very beginning of a line
 noremap ^ 0
 
+" move lines which takes also count
+nnoremap [m  :<c-u>execute 'move -1-'. v:count1<cr>
+nnoremap ]m  :<c-u>execute 'move +'. v:count1<cr>
+" add empty lines which takes also count
+nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
+nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+
+" Quickly edit your macros
+
+nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 
 " Vim-go 
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
-"NerdCommenter
-"Toggle comments in source code
-let g:NERDToggleCheckAllLines = 1
-let g:NERDSpaceDelims = 1
-
-" Add spaces after comment
-let g:NERDSpaceDelims = 1
-nmap <leader>/ <plug>NERDCommenterToggle
-xmap <leader>/ <plug>NERDCommenterToggle
-
+"
 " BarBar 
 " Magic buffer-picking mode
 nnoremap <silent> <C-s> :BufferPick<CR>
@@ -244,7 +237,7 @@ nnoremap <silent>gr <cmd>lua require('lspsaga.rename').rename()<CR>
 " -- preview definition
 nnoremap <silent> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
 " -- show
-nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+nnoremap <silent><leader>e <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
 " -- jump diagnostic
 nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
 nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
@@ -255,7 +248,8 @@ tnoremap <silent> <A-d> <C-\><C-n>:lua require('lspsaga.floaterm').close_float_t
 
 " nvim_compe
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"

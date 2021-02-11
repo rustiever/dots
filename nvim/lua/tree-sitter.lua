@@ -5,8 +5,7 @@ return require'nvim-treesitter.configs'.setup {
   indent = {
     enable = true
   },
-  rainbow = {
-    enable = true,
+  rainbow = { enable = true,
     disable = {'bash'} -- please disable bash until I figure #1 out
   }
    -- ,

@@ -79,13 +79,14 @@ plugins=(git
 osx
 common-aliases
 flutter
+golang
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # setting neovim/nvim as vim/vi
 # if type nvim > /dev/null 2>&1; then
-    alias v='nvim'
+    # alias v='nvim'
     alias vi='nvim'
 # fi
 
@@ -118,7 +119,7 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias duf='du -sh'
-alias cpnvim='cp -r ~/.config/nvim/ ~/Documents/Repos/dots/nvim/'
+alias cpnvim='\cp -r ~/.config/nvim/ ~/Documents/Repos/dots/nvim/'
 alias cpzal='\cp ~/.zshrc ~/Documents/Repos/dots/zshrc ; \cp ~/.config/alacritty/alacritty.yml ~/Documents/Repos/dots/alacritty/alacritty.yml; \cp ~/.p10k.zsh ~/Documents/Repos/dots/'
 alias init='vi ~/.config/nvim/init.vim'
 alias dots='~/.config/nvim/'
