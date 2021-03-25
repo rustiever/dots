@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/sharan/.oh-my-zsh"
+export ZSH="/Users/sharanr/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -40,7 +40,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -52,6 +52,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -75,24 +77,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git 
-osx
-common-aliases
-flutter
-golang
-)
+plugins=(git golang flutter colored-man-pages colorize pip python brew osx zsh-syntax-highlighting zsh-autosuggestions )
 
+ZSH_DISABLE_COMPFIX="true"
 source $ZSH/oh-my-zsh.sh
-
-# setting neovim/nvim as vim/vi
-# if type nvim > /dev/null 2>&1; then
-    # alias v='nvim'
-    alias vi='nvim'
-# fi
-
 export EDITOR='nvim'
-
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -123,9 +112,7 @@ alias cpnvim='\cp -r ~/.config/nvim/ ~/Documents/Repos/dots/nvim/'
 alias cpzal='\cp ~/.zshrc ~/Documents/Repos/dots/zshrc ; \cp ~/.config/alacritty/alacritty.yml ~/Documents/Repos/dots/alacritty/alacritty.yml; \cp ~/.p10k.zsh ~/Documents/Repos/dots/'
 alias init='vi ~/.config/nvim/init.vim'
 alias dots='~/.config/nvim/'
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# vi mode
+alias vi='nvim'
 bindkey -v
 export KEYTIMEOUT=1
 
@@ -136,15 +123,12 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
-# FLUTTER PATH
-export PATH="$PATH:/Users/sharan/Developer/flutter/bin"
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PATH="$PATH":"$HOME/Developer/flutter/.pub-cache/bin"
-export GOPATH=/Users/sharan/go
+export PATH="$PATH:/Users/sharanr/Developer/flutter/bin"
+export GOPATH=/Users/sharanr/go
 export PATH=$PATH:$GOPATH
 export PATH=$PATH:$GOPATH/bin
-unsetopt HIST_VERIFY
+
+unsetopt HIST_VERIFY # to run the previous command

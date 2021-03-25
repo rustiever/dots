@@ -1,18 +1,10 @@
-lua require('plugins')
+lua require ('plugins')
+
+
+
 autocmd BufWritePost plugins.lua PackerCompile
-
-set termguicolors              " enable true colors support
-lua require ('tree-sitter')
-lua require ('lsp-config')
-
-"QuickScope
-" Trigger a highlight in the appropriate direction when pressing these keys:
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-let g:qs_lazy_highlight = 1
-let g:qs_buftype_blacklist = ['terminal', 'nofile']
-
-
-
+set termguicolors
+colorscheme edge
 set nocompatible
 filetype plugin indent on      " Automatically detect file types
 syntax on                      " Syntax highlighting
@@ -80,7 +72,9 @@ set undolevels=1000      " Maximum number of changes that can be undone
 set undoreload=10000     " Maximum number lines to save for undo on a buffer reload
 set showtabline=2        " Always showtabline
 set noshowmode           " We don't need to see things like -- INSERT -- anymore
-set completeopt=menu,menuone,noselect
+set shortmess+=c
+set completeopt=menuone,noselect
+let g:vimsyn_embed = 'l'
 " Key - Mappings
 let mapleader ="\<Space>" " leader key
 " Visual shifting (does not exit Visual mode)
@@ -165,26 +159,12 @@ nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 " Quickly edit your macros
 
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 
-" Vim-go 
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-"
-" BarBar 
-" Magic buffer-picking mode
-nnoremap <silent> <C-s> :BufferPick<CR>
-" Sort automatically by...
-nnoremap <silent> <Space>bd :BufferOrderByDirectory<CR>
-nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
+
+" BarBar
 " Move to previous/next
-nnoremap <silent>    gb :BufferPrevious<CR>
-nnoremap <silent>    gn :BufferNext<CR>
+nnoremap <silent>    <A-,> :BufferPrevious<CR>
+nnoremap <silent>    <A-.> :BufferNext<CR>
 " Re-order to previous/next
 nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
 nnoremap <silent>    <A->> :BufferMoveNext<CR>
@@ -206,50 +186,50 @@ nnoremap <silent>    <A-c> :BufferClose<CR>
 "                          :BufferCloseAllButCurrent<CR>
 "                          :BufferCloseBuffersLeft<CR>
 "                          :BufferCloseBuffersRight<CR>
+" Magic buffer-picking mode
+nnoremap <silent> <C-s>    :BufferPick<CR>
+" Sort automatically by...
+nnoremap <silent> <Space>bd :BufferOrderByDirectory<CR>
+nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
+
+" Other:
+" :BarbarEnable - enables barbar (enabled by default)
+" :BarbarDisable - very bad command, should never be used
 "
 "
-" Vsnip
-" Jump forward or backward
-imap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-k>'
-smap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-k>'
-imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-j>'
-smap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-j>'
-" Expand or jump
-imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-
-" -- lsp provider to find the cursor word definition and reference
-nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
-" -- code action
-nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
-vnoremap <silent><leader>ca <cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<CR>
-" -- show hover doc
-nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
-" -- scroll down hover doc
-nnoremap <silent> <C-f> <cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<CR>
-" -- scroll up hover doc
-nnoremap <silent> <C-b> <cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<CR>
-" -- show signature help
-nnoremap <silent> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
-" -- rename
-nnoremap <silent>gr <cmd>lua require('lspsaga.rename').rename()<CR>
-" -- close rename win use <C-c> in insert mode or `q` in noremal mode or `:q`
-" -- preview definition
-nnoremap <silent> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
-" -- show
-nnoremap <silent><leader>e <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
-" -- jump diagnostic
-nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
-nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
-" -- float terminal also you can pass the cli command in open_float_terminal function
-nnoremap <silent> <A-d> <cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR> 
-"-- or open_float_terminal('lazygit')<CR>
-tnoremap <silent> <A-d> <C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>
-
-" nvim_compe
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+"nvim-compe
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+" nvim-tree
+
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
+" default will show icon by default if no icon is provided
+" default shows no icon by default
+let g:nvim_tree_icons = {
+    \ 'default': '',
+    \ 'symlink': '',
+    \ 'git': {
+    \   'unstaged': "✗",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': "➜",
+    \   'untracked': "★"
+    \   },
+    \ 'folder': {
+    \   'default': "",
+    \   'open': "",
+    \   'empty': "",
+    \   'empty_open': "",
+    \   'symlink': "",
+    \   'symlink_open': "",
+    \   }
+    \ }
+
+nnoremap <C-t> :NvimTreeToggle<CR>
+"nnoremap <leader>r :NvimTreeRefresh<CR>
+"nnoremap <leader>n :NvimTreeFindFile<CR>
+" NvimTreeOpen and NvimTreeClose are also available if you need them
