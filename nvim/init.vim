@@ -1,7 +1,6 @@
 lua require ('plugins')
 
 
-
 autocmd BufWritePost plugins.lua PackerCompile
 set termguicolors
 colorscheme edge
@@ -204,32 +203,16 @@ inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
-" nvim-tree
+" nvim-hlslens
+noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
+            \<Cmd>lua require('hlslens').start()<CR>
+noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR>
+            \<Cmd>lua require('hlslens').start()<CR>
+noremap * *<Cmd>lua require('hlslens').start()<CR>
+noremap # #<Cmd>lua require('hlslens').start()<CR>
+noremap g* g*<Cmd>lua require('hlslens').start()<CR>
+noremap g# g#<Cmd>lua require('hlslens').start()<CR>
 
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
-" default will show icon by default if no icon is provided
-" default shows no icon by default
-let g:nvim_tree_icons = {
-    \ 'default': '',
-    \ 'symlink': '',
-    \ 'git': {
-    \   'unstaged': "✗",
-    \   'staged': "✓",
-    \   'unmerged': "",
-    \   'renamed': "➜",
-    \   'untracked': "★"
-    \   },
-    \ 'folder': {
-    \   'default': "",
-    \   'open': "",
-    \   'empty': "",
-    \   'empty_open': "",
-    \   'symlink': "",
-    \   'symlink_open': "",
-    \   }
-    \ }
-
-nnoremap <C-t> :NvimTreeToggle<CR>
-"nnoremap <leader>r :NvimTreeRefresh<CR>
-"nnoremap <leader>n :NvimTreeFindFile<CR>
-" NvimTreeOpen and NvimTreeClose are also available if you need them
+" Hop.nvim
+noremap <silent> <leader><leader>w :HopWord<CR>
+noremap <silent> <leader><leader>l :HopLine<CR>

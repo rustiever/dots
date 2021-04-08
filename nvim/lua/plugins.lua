@@ -1,13 +1,30 @@
 return require('packer').startup(function()
+    use 'wbthomason/packer.nvim'
     use 'sainnhe/edge'
     use 'wakatime/vim-wakatime'
     use 'romgrk/barbar.nvim'
     use 'machakann/vim-sandwich'
-   use {
-        'kyazdani42/nvim-tree.lua',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true},
-    config = function() require'tree-config'.setup() end
+    use 'kevinhwang91/nvim-hlslens'
+    use {
+        'phaazon/hop.nvim',
+        as = 'hop',
+        config = function()
+            -- you can configure Hop the way you like here; see :h hop-config
+            require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+        end
     }
+    use{ 'windwp/nvim-autopairs',
+        config = function() 
+            require('nvim-autopairs').setup({
+                disable_filetype = { "TelescopePrompt" , "vim" },
+            })
+        end
+}
+--    use {
+--        'kyazdani42/nvim-tree.lua',
+    --        requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    --        config = function() require'tree-config'.setup() end
+    --    }
     use {
         'neovim/nvim-lspconfig',
         config = function() 
@@ -26,6 +43,7 @@ return require('packer').startup(function()
     }
     use {
         'hrsh7th/nvim-compe',
+        event = 'InsertEnter *',
         config = function()
             require'compe'.setup {
                 enabled = true;
@@ -56,6 +74,10 @@ return require('packer').startup(function()
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' ,
         config = function()
             require('nvim-treesitter.configs').setup({
+                rainbow = {
+                    enable = true,
+                    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+                },
                 highlight = {
                     enable = true,
                 },
