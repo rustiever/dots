@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -71,11 +71,21 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-git
-tmux
-z
+  dnf
+  docker
+  git
+  golang
+  kubectl
+  tmux
+  vi-mode
+  z
+  zbell
 )
+zbell_duration=60
+zbell_ignore=($EDITOR $PAGER vi nvim vim lazygit)
 
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 source $ZSH/oh-my-zsh.sh
 
@@ -86,12 +96,6 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -101,9 +105,24 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-export EDITOR='nvim'
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi=nvim
-alias t=tmux
-bindkey -v
-export KEYTIMEOUT=1
+export EDITOR=nvim
+source <(kubectl completion zsh)
+source <(kind completion zsh)
+source <(clusterctl completion zsh)
+source <(gh completion -s zsh)
+source <(tilt completion zsh)
+alias ck=clusterctl
 
+eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
+# bindkey -v
+GOPATH=$(go env GOPATH)
+export PATH=$PATH:$GOPATH/bin
+alias t=tmux
+alias -s git="git clone"
+
+export GOPRIVATE=github.com/RafaySystems/*
