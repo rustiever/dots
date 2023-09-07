@@ -1,0 +1,31 @@
+[include]
+	path=~/git-rafay.conf
+[includeIf "gitdir:~/kode/personal/"]
+	path=~/git-rustiever.conf
+; [user]
+; 	name = sharan
+; 	email = sharan.r@rafay.co
+; [core]
+; 	editor = vi
+; [push]
+; 	default = current
+; 	autoSetupRemote = true
+; [url "ssh://git@github.com/"]
+; 	insteadOf = https://github.com/
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[core]
+	editor = nvim
+	excludesfile = /home/sharan/.gitignore
+[alias]
+	build = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"build(${2}): ${@:3}\"; else git commit -m \"build: ${@}\"; fi }; a"
+	chore = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"chore(${2}): ${@:3}\"; else git commit -m \"chore: ${@}\"; fi }; a"
+	ci = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"ci(${2}): ${@:3}\"; else git commit -m \"ci: ${@}\"; fi }; a"
+	docs = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"docs(${2}): ${@:3}\"; else git commit -m \"docs: ${@}\"; fi }; a"
+	feat = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"feat(${2}): ${@:3}\"; else git commit -m \"feat: ${@}\"; fi }; a"
+	fix = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"fix(${2}): ${@:3}\"; else git commit -m \"fix: ${@}\"; fi }; a"
+	perf = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"perf(${2}): ${@:3}\"; else git commit -m \"perf: ${@}\"; fi }; a"
+	refactor = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"refactor(${2}): ${@:3}\"; else git commit -m \"refactor: ${@}\"; fi }; a"
+	revert = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"revert(${2}): ${@:3}\"; else git commit -m \"revert: ${@}\"; fi }; a"
+	style = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"style(${2}): ${@:3}\"; else git commit -m \"style: ${@}\"; fi }; a"
+	test = "!a() { if [[ \"$1\" == \"-s\" || \"$1\" == \"--scope\" ]]; then git commit -m \"test(${2}): ${@:3}\"; else git commit -m \"test: ${@}\"; fi }; a"
